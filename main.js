@@ -36,7 +36,7 @@ window.onload = function(){
 						if(!pressed.value == "") {
 							if (firstCalc = true) {historySection.classList.add("show"); firstCalc = false}
 							numeric = Math.floor(eval(pressed.value) * 100) / 100;
-							get('#output').innerHTML += '\n' + pressed.value;
+							get('#output').innerHTML += '</br>' + pressed.value;
 							get('#output').innerHTML += '=' + numeric;	
 							pressed.value = numeric;
 							flagCalc = true;

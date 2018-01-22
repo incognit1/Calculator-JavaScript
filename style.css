@@ -121,20 +121,18 @@ button:hover {
     left: 0;
 }
 
-textarea {
+#output {
     color: #fff;
     font-size: 16px;
     letter-spacing: 2.2px;
-    background: transparent;
     text-align: left;
     padding: 25px 23px;
     line-height: 22px;
-    outline: none;
     transition: 1s;
     border: none;
 }
 
-textarea:hover {
+#output:hover {
     box-shadow: 28px 2px 120px #ffffff69;
     transition: 1s;
 }
