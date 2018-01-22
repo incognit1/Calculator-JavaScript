@@ -4,18 +4,24 @@ body, header, p, div, ul, li, section, h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-    background: #333;
+    background: url(https://oboitut.com/uploads/posts/oboitut.com_2190.jpg);
+    font-family: "NotCourierSansRegular", sans-serif
 }
 
 .wrapper {
-	background: #ccc;
-	width: 50%;
+    width: 60%;
 	margin: 100px auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+#calculator {
+    background: #cccccc4a;
 }
 
 header {
 	text-align: center;
-	background: #eee
+	transition: 1s;
 }
 
 #calc {
@@ -27,24 +33,44 @@ header {
 	flex-grow: 1;
 }
 
+#memory {
+    display: block;
+    margin-top: 10px;
+    color: #8c8c8c;
+    font-weight: bold;
+    transition: 1s;
+}
+
 .container {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-column-gap: 10px;
 	grid-row-gap: 10px;
-    padding: 10px;
+    padding: 35px;
 }
 
-#title {
-	background: #2e2e2e;
-	padding: 10px;
-	color: #fff;
+.small {
+	font-size: 15px;
+}
+
+#focus {
+    background: #5eb959;
+    color: #fff;
+}
+
+.title {
+    background: #5eb959;
+    padding: 10px;
+    color: #fff;
 }
 
 #pressed {
     font-size: 30px;
     margin: 20px;
     padding: 10px 20px;
+    background: #5eb95947;
+    border: 1px solid #5eb959;
+    color: #fff;
 }
 		
 .wide {
@@ -55,4 +81,94 @@ button {
     padding: 8px;
     font-size: 20px;
     cursor: pointer;
+    background: transparent;
+    border: 1px solid #a29b62;
+    outline: none;
+}
+
+button:hover {
+	background: #b1b578;
+    border: 1px solid #5eb959;
+    transition: .4s;
+}
+
+/*History*/
+
+#history {
+    display: grid;
+    background: #499445;
+    margin: 50px 0;
+    position: relative;
+}
+
+#history:before {
+    position: absolute;
+    content: '';
+    border: 25px solid transparent;
+    border-bottom: 55px solid #499445;
+    border-left: 10px solid #499445;
+    top: -50px;
+    left: 0;
+}
+
+#history:after {
+    position: absolute;
+    content: '';
+    border: 25px solid transparent;
+    border-top: 55px solid #499445;
+    border-left: 10px solid #499445;
+    bottom: -50px;
+    left: 0;
+}
+
+textarea {
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 2.2px;
+    background: transparent;
+    text-align: left;
+    padding: 25px 23px;
+    line-height: 22px;
+    outline: none;
+    transition: 1s;
+    border: none;
+}
+
+textarea:hover {
+    box-shadow: 28px 2px 120px #ffffff69;
+    transition: 1s;
+}
+
+
+@keyframes flipInY {
+  from {
+    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    transform-origin: 0px 0px;
+    animation-timing-function: ease-in;
+    opacity: 1;
+  }
+
+  40% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+  }
+
+  to {
+    transform: perspective(400px);
+  }
+}
+
+#history {
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+  animation: flipInY 1s ease;
 }

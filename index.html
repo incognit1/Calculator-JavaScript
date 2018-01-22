@@ -4,19 +4,20 @@
 	<meta charset="UTF-8">
 	<title>Калькулятор</title>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/fonts.css">
 </head>
 <body>
 	<div class="wrapper">
 		<section id="calculator">
 			<header>
-				<h1 id="title">Калькулятор</h1>
-				<p id="memory">-</p>
+				<h2 class="title">Калькулятор</h2>
+				<output id="memory"></output>
 				<input type="text" id="pressed" value="" disabled="" />
 			</header>
 			<div class="container">
-				<button value="M">M</button>
-				<button value="C">C</button>
-				<button value="CLast">⌦</button>
+				<button value="M" class="small">M</button>
+				<button value="C" class="small">C</button>
+				<button value="CLast" class="small">⌦</button>
 				<button value="/">÷</button>
 				<button value="7">7</button>
 				<button value="8">8</button>
@@ -32,12 +33,13 @@
 				<button value="+">+</button>
 				<button class="wide" value="0">0</button>
 				<button value=".">.</button>
-				<button value="=">=</button>
+				<button value="=" id="focus">=</button>
 			</div>
 		</section>
 		<section id="history">
-			<textarea id="output"></textarea>
+			<textarea id="output">История операций:</textarea>
 		</section>
+		
 	</div>
 
 	<script>
@@ -73,10 +75,10 @@
 
 				switch (event.target.value) {
 					case '=': 	
-						numeric = eval(pressed.value);
-						historyOutput.innerHTML += pressed.value;
+						numeric = Math.floor(eval(pressed.value) * 100) / 100;
+						get('#output').innerHTML += '\n' + pressed.value;
+						get('#output').innerHTML += '=' + numeric;	
 						pressed.value = numeric;
-						historyOutput.innerHTML += '=' + pressed.value + '\n';	
 						flagCalc = true;					
 						break;
 					case 'CLast':
@@ -93,9 +95,14 @@
 			}
 		}, false) 
 		
+		historyOutput.addEventListener('change', function() {
+			this.innerHTML = this.value;
+		}, false)
+
 		function get(el) {
 			return document.querySelector(el);
 		}
 	</script>
+
 </body>
 </html>
