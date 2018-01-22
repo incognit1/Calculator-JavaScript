@@ -95,7 +95,7 @@ button:hover {
 /*History*/
 
 #history {
-    display: grid;
+    display: none;
     background: #499445;
     margin: 50px 0;
     position: relative;
@@ -167,8 +167,7 @@ textarea:hover {
   }
 }
 
-#history {
-  -webkit-backface-visibility: visible !important;
-  backface-visibility: visible !important;
-  animation: flipInY 1s ease;
+.show {
+	display: grid!important;
+  	animation: flipInY .5s ease;
 }
