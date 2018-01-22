@@ -35,13 +35,13 @@ header {
     padding: 10px;
 }
 
-#historyStr {
+#title {
 	background: #2e2e2e;
 	padding: 10px;
 	color: #fff;
 }
 
-#pressedValue {
+#pressed {
     font-size: 30px;
     margin: 20px;
     padding: 10px 20px;

@@ -9,10 +9,9 @@
 	<div class="wrapper">
 		<section id="calculator">
 			<header>
-				<p>
-					<h1 id="historyStr">Калькулятор</h1>
-				</p>
-				<input type="text" id="pressedValue" value="" disabled="" />
+				<h1 id="title">Калькулятор</h1>
+				<p id="memory">-</p>
+				<input type="text" id="pressed" value="" disabled="" />
 			</header>
 			<div class="container">
 				<button value="M">M</button>
@@ -36,53 +35,61 @@
 				<button value="=">=</button>
 			</div>
 		</section>
-
+		<section id="history">
+			<textarea id="output"></textarea>
+		</section>
 	</div>
 
 	<script>
 		var container = get(".container"),
 			arrButtons = container.getElementsByTagName("button"),
-			historyStr = get('#historyStr'),
-			pressedValue = get('#pressedValue');
-		var numeric;
+			historyOutput = get('#output'),
+			pressed = get('#pressed'),
+			memory = get('#memory');
+		var numeric,
+			flag = false,
+			flagCalc = false;
 		var patDigit = /[0-9|\.]+/,
-			patOperations = /[\*\/\+\-]/,
-			flag = true;
+			patOperations = /[\*\/\+\-]/;
 
 		container.addEventListener('click', function(event){
 			if (event.target.nodeName == 'BUTTON'){
-
 				if (~event.target.value.search(patDigit)) {
-					pressedValue.value += event.target.value;
+					if (flagCalc) {
+						pressed.value = ''; 
+						flagCalc = false;  
+					}
+					pressed.value += event.target.value;
 					flag = true;
 				}
 
 				else if (~event.target.value.search(patOperations)) {
 					if (flag) {
-						pressedValue.value += event.target.value;
+						pressed.value += event.target.value;
 						flag = false;
+						flagCalc = false;  
 					}
 				}
 
-				else if(event.target.value == '=') {
-					numeric = eval(pressedValue.value);
-
-					pressedValue.value = numeric;
+				switch (event.target.value) {
+					case '=': 	
+						numeric = eval(pressed.value);
+						historyOutput.innerHTML += pressed.value;
+						pressed.value = numeric;
+						historyOutput.innerHTML += '=' + pressed.value + '\n';	
+						flagCalc = true;					
+						break;
+					case 'CLast':
+						var clast = pressed.value.substring(0, pressed.value.length-1);
+						pressed.value = clast;
+						break;
+					case 'C':
+						pressed.value = "";
+						break;
+					case 'M':
+						memory.innerHTML = pressed.value;
+						break;
 				}
-
-				else if(event.target.value == 'CLast') {
-					var clast = pressedValue.value.substring(0, pressedValue.value.length-1);
-					pressedValue.value = clast;
-				}
-
-				else if(event.target.value == 'C') {
-					pressedValue.value = "";
-				}
-
-
-
-
-
 			}
 		}, false) 
 		
