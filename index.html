@@ -5,12 +5,15 @@
 	<title>Калькулятор</title>
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="css/fonts.css">
+	<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 </head>
 <body>
 	<div class="wrapper">
 		<section id="calculator">
 			<header>
 				<h2 class="title">Калькулятор</h2>
+				<button id="printBtn" class="button" disabled="" onclick="javascript: print();"><i class="fas fa-print"></i></button>
+				
 				<output id="memory"></output>
 				<input type="text" id="pressed" value="" disabled="" />
 			</header>
@@ -37,9 +40,9 @@
 			</div>
 		</section>
 		<section id="history">
-			<p id="output">История операций:</p>
+			<textarea id="output" autofocus="">История операций:</textarea>
 		</section>	
 	</div>
-<script src="main.js"></script>
+	<script src="main.js"></script>
 </body>
 </html>

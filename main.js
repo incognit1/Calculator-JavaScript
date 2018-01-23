@@ -1,18 +1,15 @@
 window.onload = function(){
-		var container = get(".container"),
-			arrButtons = container.getElementsByTagName("button"),
-			historyOutput = get('#output'),
-			historySection = get('#history'),
-			pressed = get('#pressed'),
-			memory = get('#memory');
-		var numeric,
-			flag = false,
-			flagCalc = false,
-			firstCalc = true;
-		var patDigit = /[0-9|\.]+/,
-			patOperations = /[\*\/\+\-]/;
+		var pressed = get('#pressed'); //entered data
+		var numeric, 
+			flag = false, //control of mathematical expressions
+			flagCalc = false, //zeroes the value after entering a new value
+			firstCalc = true; // to open the story after first cacl
 
-		container.addEventListener('click', function(event){
+		var patDigit = /[0-9|\.]+/, //checking for numeric values
+			patOperations = /[\*\/\+\-]/; //checking for operation values
+
+		get(".container").addEventListener('click', function(event){
+
 			if (event.target.nodeName == 'BUTTON'){
 				if (~event.target.value.search(patDigit)) {
 					if (flagCalc) {
@@ -34,10 +31,16 @@ window.onload = function(){
 				switch (event.target.value) {
 					case '=': 	
 						if(!pressed.value == "") {
-							if (firstCalc = true) {historySection.classList.add("show"); firstCalc = false}
+							if (firstCalc = true) { 
+								get('#history').classList.add("show"); 
+								firstCalc = false; 
+								get('#printBtn').removeAttribute('disabled'); 
+								get('#printBtn').classList.add("zoom");
+							}
 							numeric = Math.floor(eval(pressed.value) * 100) / 100;
-							get('#output').innerHTML += '</br>' + pressed.value;
-							get('#output').innerHTML += '=' + numeric;	
+							get('#output').value += '\n' + pressed.value;
+							get('#output').value += '=' + numeric + ' ';
+							get('#output').focus();	
 							pressed.value = numeric;
 							flagCalc = true;
 							firstCalc = true;
@@ -51,15 +54,11 @@ window.onload = function(){
 						pressed.value = "";
 						break;
 					case 'M':
-						memory.innerHTML = pressed.value;
+						get('#memory').innerHTML = pressed.value;
 						break;
 				}
 			}
 		}, false) 
-		
-		historyOutput.addEventListener('change', function() {
-			this.innerHTML = this.value;
-		}, false)
 
 		function get(el) {
 			return document.querySelector(el);

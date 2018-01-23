@@ -4,7 +4,7 @@ body, header, p, div, ul, li, section, h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-    background: url(https://oboitut.com/uploads/posts/oboitut.com_2190.jpg);
+    background: url(img/bg-min.jpg);
     font-family: "NotCourierSansRegular", sans-serif
 }
 
@@ -15,6 +15,16 @@ body {
     grid-template-columns: 2fr 1fr;
 }
 
+::selection {
+    background: #333;
+}
+
+[contenteditable], textarea {
+  caret-color: #fff;
+}
+
+/*Calculator*/
+
 #calculator {
     background: #cccccc4a;
 }
@@ -22,6 +32,22 @@ body {
 header {
 	text-align: center;
 	transition: 1s;
+    position: relative;
+}
+
+#printBtn {
+    border: none;
+    color: #00000070;
+    position: absolute;
+    right: 16px;
+    top: 10px;
+    font-size: 16px;
+    transition: 1s;
+}
+
+button[disabled] {
+    color: #00000026 !important;
+    cursor: not-allowed;
 }
 
 #calc {
@@ -84,10 +110,11 @@ button {
     background: transparent;
     border: 1px solid #a29b62;
     outline: none;
+    color: #1d1d1d;
 }
 
 button:hover {
-	background: #b1b578;
+    background: #b1b578;
     border: 1px solid #5eb959;
     transition: .4s;
 }
@@ -96,7 +123,6 @@ button:hover {
 
 #history {
     display: none;
-    background: #499445;
     margin: 50px 0;
     position: relative;
 }
@@ -104,8 +130,8 @@ button:hover {
 #history:before {
     position: absolute;
     content: '';
-    border: 25px solid transparent;
-    border-bottom: 55px solid #499445;
+    border: 20px solid transparent;
+    border-bottom: 45px solid #499445;
     border-left: 10px solid #499445;
     top: -50px;
     left: 0;
@@ -114,14 +140,17 @@ button:hover {
 #history:after {
     position: absolute;
     content: '';
-    border: 25px solid transparent;
-    border-top: 55px solid #499445;
+    border: 20px solid transparent;
+    border-top: 45px solid #499445;
     border-left: 10px solid #499445;
     bottom: -50px;
     left: 0;
 }
 
 #output {
+    min-height: 300px;
+    min-width: 100px;
+    background: #499445;
     color: #fff;
     font-size: 16px;
     letter-spacing: 2.2px;
@@ -130,6 +159,8 @@ button:hover {
     line-height: 22px;
     transition: 1s;
     border: none;
+    outline: none;
+
 }
 
 #output:hover {
@@ -137,7 +168,7 @@ button:hover {
     transition: 1s;
 }
 
-
+/*Animation*/
 @keyframes flipInY {
   from {
     transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
@@ -165,7 +196,41 @@ button:hover {
   }
 }
 
+@keyframes zoom {
+    from {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.zoom {
+    animation: zoom 2s ease;
+    animation-delay: 1s;
+}
+
 .show {
 	display: grid!important;
   	animation: flipInY .5s ease;
+}
+
+/*Print*/
+@media print {
+.wrapper {
+    width: 80%;
+    grid-template-columns: 1fr;
+}
+#printBtn { display:none; }
+#history:after, #history:before, #calculator { display: none; }
+#output {
+    color: #666;
+    font-size: 20px;
+    line-height: 25px;
+    }
 }
